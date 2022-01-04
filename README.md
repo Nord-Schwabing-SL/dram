@@ -1,29 +1,27 @@
 [![official JetBrains project](https://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
-# Description
-Converter of TypeScript definition files to Kotlin declarations
+# What is Katod
 
-This requires JRE 1.6+ to run. It generates Kotlin files that are compatible with Kotlin 1.1+ (generated declarations
+Katod is a converter of TypeScript definition files to Kotlin declarations.
+It's a fork of [Dukat](https://github.com/Kotlin/dukat) project, an officially supported by Jetbrains tool for the same purposes.
+
+As of now there now there's absolutely no difference between `dukat` and `katod`, feel free
+to use whatever you like more.
+
+Katod requires JRE 1.6+ to run. It generates Kotlin files that are compatible with Kotlin 1.1+ (generated declarations
 are tested against latest stable compiler version)
 
 # How to install
 
-The simplest way to use is install the latest version form [npm](https://www.npmjs.com/package/dukat):
+The simplest way to use is install the latest version form [npm](https://www.npmjs.com/package/katod):
 ```shell
-npm install -g dukat
-```
-
-On a weekly basis we also deply a dev build which sums up what we currently have in master, 
-so **if you want to checkout the snapshot version, use `dukat@next`**:
-
-```
-npm install -g dukat@next
+npm install -g katod
 ```
 
 # Usage
 
 ```shell
-dukat [<options>] <d.ts files>
+katod [<options>] <d.ts files>
 ```
 
 where possible options include:
@@ -54,7 +52,7 @@ where possible options include:
 ./gradlew test -Pdukat.test.failure.always
 ```  
 
-[see CHANGELOG](https://github.com/Kotlin/dukat/blob/master/CHANGELOG.md)
+[see CHANGELOG](https://github.com/Kotlin/katod/blob/master/CHANGELOG.md)
 
 # Useful links
 

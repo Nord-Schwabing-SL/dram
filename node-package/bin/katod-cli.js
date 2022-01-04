@@ -30,14 +30,14 @@ function run(command, args) {
 
 function printInvalidJavaHome() {
     printError("Your \"JAVA_HOME\" environment variable points to an invalid directory.");
-    printError("As of now \"dukat\" requires Java Runtime Environment to be installed.");
+    printError("As of now \"katod\" requires Java Runtime Environment to be installed.");
     printError("Either set \"JAVA_HOME\" to a proper Java installation,");
     printError("or make sure \"java\" is callable from commandline and unset \"JAVA_HOME\".");
 }
 
 function printNoJava() {
     printError("\"java\" is not callable from commandline and no \"JAVA_HOME\" environment variable is set.");
-    printError("As of now \"dukat\" requires Java Runtime Environment to be installed.");
+    printError("As of now \"katod\" requires Java Runtime Environment to be installed.");
     printError("Either set \"JAVA_HOME\" to a proper Java installation,");
     printError("or make sure \"java\" is callable from commandline.");
 }
@@ -148,7 +148,7 @@ function cliMode(args) {
 
     if (args[0] == "-v" || args[0] == "version") {
         var version = require(path.resolve(packageDir, "package.json")).version;
-        console.log("dukat version " + version);
+        console.log("katod version " + version);
         return;
     }
 

@@ -223,7 +223,7 @@ following file extensions are supported:
 
 fun main(vararg args: String) {
     if (args.isEmpty()) {
-        printUsage("dukat")
+        printUsage("katod")
         return
     }
 

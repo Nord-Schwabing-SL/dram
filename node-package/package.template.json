@@ -1,14 +1,14 @@
 {
-  "name": "dukat",
+  "name": "katod",
   "version": "__PACKAGE_VERSION__",
-  "description": "Converter definition files to Kotlin declarations. Currently support TypeScript declarations",
+  "description": "Converter definition files to Kotlin declarations. A fork of Dukat project. Currently support TypeScript declarations",
   "bin": {
-    "dukat": "./bin/dukat-cli.js"
+    "katod": "./bin/katod-cli.js"
   },
   "files": [
     "build/runtime/dukat-cli.jar",
     "build/runtime/kotlin-stdlib-js.jar",
-    "bin/dukat-cli.js",
+    "bin/katod-cli.js",
     "lib/converter.js",
     "resources/stdlib.dukat",
     "d.ts.libs/*",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kotlin/dukat.git"
+    "url": "git+https://github.com/Nord-Schwabing-SL/katod.git"
   },
   "keywords": [
     "Kotlin",
@@ -29,12 +29,12 @@
     "JavaScript",
     "DefinitelyTyped"
   ],
-  "author": "JetBrains s.r.o.",
+  "author": "Schwabing Nord Softwarelösungen",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Kotlin/dukat/issues"
+    "url": "https://github.com/Kotlin/katod/issues"
   },
-  "homepage": "https://github.com/Kotlin/dukat#readme",
+  "homepage": "https://github.com/Nord-Schwabing-SL/katod/blob/main/README.md",
   "dependencies": {
     "typescript": "__TS_VERSION__",
     "google-protobuf": "__PROTOBUF_VERSION__"
