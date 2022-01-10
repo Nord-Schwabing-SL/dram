@@ -14,11 +14,6 @@ plugins {
     id("kotlinx-serialization")
 }
 
-configurations {
-    toDownload
-    kotlinJsLibs
-}
-
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
@@ -78,10 +73,6 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-core:${gradle.kotlinSerializationVersion}"
 
     compile(project(path: ":ts-converter", configuration: 'dukatTsResources'))
-
-    kotlinJsLibs("org.jetbrains.kotlin:kotlin-stdlib-js:${gradle.kotlinVersion}")
-
-    toDownload 'org.jetbrains.kotlin:kotlin-stdlib-js'
 }
 
 def getTsDependency() {
@@ -103,12 +94,6 @@ task propagateToIdeaRuntime(type: Copy) {
 }
 
 compileTestKotlin.dependsOn = ["propagateToIdeaRuntime"]
-
-task download(type: Copy) {
-    from configurations.toDownload
-    into "${project.buildDir}/lib"
-    rename "kotlin-stdlib-js-${gradle.kotlinVersion}.jar", "kotlin-stdlib-js.jar"
-}
 
 task downloadDefinitelyTyped(type: Download) {
     onlyIfModified true
@@ -158,7 +143,6 @@ task prebuild {
 }
 
 test.dependsOn = [
-        download,
         fetchDefinitelyTyped,
         installTopN,
         ":node-package:nodeEnv",
