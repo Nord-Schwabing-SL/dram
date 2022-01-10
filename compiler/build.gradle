@@ -35,7 +35,6 @@ dependencies {
 
     implementation(project(":ast-common"))
     implementation(project(":ast-model"))
-    implementation(project(":descriptors"))
     implementation(project(":idl-declarations"))
     implementation(project(":idl-lowerings"))
     implementation(project(":idl-models"))

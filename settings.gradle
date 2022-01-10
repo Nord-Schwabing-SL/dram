@@ -56,8 +56,6 @@ include 'command-line'
 include 'graphs'
 include 'model-lowerings-common'
 include 'compiler'
-include 'descriptors'
-include 'descriptors-1.4.0'
 include 'idl-declarations'
 include 'idl-lowerings'
 include 'idl-models'
@@ -89,8 +87,6 @@ include 'ts-model-proto'
 include 'ts-model-introduction'
 include 'ts-translator'
 include 'ts-nodes'
-
-project(':descriptors-1.4.0').projectDir = file("$rootDir/version-specific/descriptors-1.4.0")
 
 project(':graphs').projectDir = file("$rootDir/abstract/graphs")
 project(':itertools').projectDir = file("$rootDir/abstract/itertools")
