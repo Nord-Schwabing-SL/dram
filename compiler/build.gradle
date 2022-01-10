@@ -183,7 +183,6 @@ test {
             "dukat.test.cli",
             "dukat.test.failure.always",
             "dukat.test.emitTsDiagnostics",
-            "dukat.test.descriptorCompilation",
             "dukat.test.typescriptDukat"
     ].forEach { String projectProperty ->
         if (project.hasProperty(projectProperty)) {
