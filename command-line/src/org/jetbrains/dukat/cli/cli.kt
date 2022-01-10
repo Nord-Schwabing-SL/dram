@@ -35,9 +35,6 @@ private class ResourceResolver {
 
     val serializedStdLib: String
         get() = packageDir.resolve("resources/stdlib.dukat").absolutePath
-
-    val stdlibJar: String
-        get() = packageDir.resolve("build/runtime/kotlin-stdlib-js.jar").absolutePath
 }
 
 private val RESOURCE_RESOLVER = ResourceResolver()
