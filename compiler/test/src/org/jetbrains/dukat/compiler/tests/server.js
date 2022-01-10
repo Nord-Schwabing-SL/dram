@@ -3,7 +3,11 @@ var path = require("path");
 var cluster = require('cluster');
 var os = require('os');
 
-var dukatCli = require("../../../../../../../../node-package/build/distrib/bin/dukat-cli.js");
+
+var pathToExecutable = path.resolve(__dirname, "../../../../../../../../node-package/build/distrib/bin/katod-cli.js");
+console.log(`[tests] path to executable ${pathToExecutable}`);
+
+var dukatCli = require(pathToExecutable);
 
 
 function ok(res) {
