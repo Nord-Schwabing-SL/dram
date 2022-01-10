@@ -125,16 +125,6 @@ task fetchDefinitelyTyped(dependsOn: downloadDefinitelyTyped, type: Copy) {
     into "${rootProject.gradle.gradleUserHomeDir}/definitelyTyped"
 }
 
-task extractKoltinJsLibs(type: Copy) {
-    configurations.kotlinJsLibs.each {
-        from it.absolutePath
-    }
-    into "${project.buildDir}/kotlinHome"
-    rename { String fileName ->
-        return fileName.replace("-${gradle.kotlinVersion}.jar", ".jar")
-    }
-}
-
 task prepareTopNPackage(type: Copy) {
     from "${TOPN_DIR}/package.json"
     into TOPN_TARGET_DIR
@@ -171,7 +161,6 @@ test.dependsOn = [
         download,
         fetchDefinitelyTyped,
         installTopN,
-        extractKoltinJsLibs,
         ":node-package:nodeEnv",
         ":node-package:buildDistrib"
 ]
