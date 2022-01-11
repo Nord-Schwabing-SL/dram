@@ -17,7 +17,6 @@ dependencies {
   implementation(project(":ast-common"))
   implementation(project(":ast-model"))
   implementation(project(path: ":compiler", configuration: "default"))
-  implementation(project(":descriptors"))
   implementation(project(":idl-reference-resolver"))
   implementation(project(":js-translator"))
   implementation(project(":module-name-resolver"))

@@ -7,7 +7,6 @@
   },
   "files": [
     "build/runtime/dukat-cli.jar",
-    "build/runtime/kotlin-stdlib-js.jar",
     "bin/katod-cli.js",
     "lib/converter.js",
     "resources/stdlib.dukat",

@@ -5,8 +5,6 @@ import kotlinx.serialization.json.Json
 import org.jetbrains.dukat.astCommon.NameEntity
 import org.jetbrains.dukat.astCommon.toNameEntity
 import org.jetbrains.dukat.compiler.translator.translateIdlSources
-import org.jetbrains.dukat.descriptors.writeDescriptorsToFile
-import org.jetbrains.dukat.descriptors.writeDescriptorsToJar
 import org.jetbrains.dukat.js.translator.translateJsSources
 import org.jetbrains.dukat.moduleNameResolver.CommonJsNameResolver
 import org.jetbrains.dukat.moduleNameResolver.ConstNameResolver
@@ -37,9 +35,6 @@ private class ResourceResolver {
 
     val serializedStdLib: String
         get() = packageDir.resolve("resources/stdlib.dukat").absolutePath
-
-    val stdlibJar: String
-        get() = packageDir.resolve("build/runtime/kotlin-stdlib-js.jar").absolutePath
 }
 
 private val RESOURCE_RESOLVER = ResourceResolver()
@@ -273,29 +268,9 @@ fun main(vararg args: String) {
             }
         }
 
-        val stdLib = RESOURCE_RESOLVER.stdlibJar
-
-        if (options.generateDescriptors) {
-            writeDescriptorsToFile(
-                    sourceSet,
-                    stdLib,
-                    options.outDir
-            ).forEach { output ->
-                println(output)
-            }
-        }  else if(options.generateDescriptorsJar) {
-            writeDescriptorsToJar(
-                sourceSet,
-                stdLib,
-                options.outDir
-            ).forEach { output ->
-                println(output)
-            }
-        } else {
-            val reportOutput = compileUnits(translateSourceSet(sourceSet), options.outDir)
-            if (options.reportPath != null) {
-                saveReport(options.reportPath, Report(reportOutput))
-            }
+        val reportOutput = compileUnits(translateSourceSet(sourceSet), options.outDir)
+        if (options.reportPath != null) {
+            saveReport(options.reportPath, Report(reportOutput))
         }
     }
 }

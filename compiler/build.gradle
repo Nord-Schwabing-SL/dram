@@ -14,13 +14,12 @@ plugins {
     id("kotlinx-serialization")
 }
 
-configurations {
-    toDownload
-    kotlinJsLibs
-}
-
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+configurations {
+    kotlinJsLibs
 }
 
 def DEF_TYPE_CHANGESET = '31929c09c7b4490f87766206b412da4a6a581dc3'
@@ -35,7 +34,6 @@ dependencies {
 
     implementation(project(":ast-common"))
     implementation(project(":ast-model"))
-    implementation(project(":descriptors"))
     implementation(project(":idl-declarations"))
     implementation(project(":idl-lowerings"))
     implementation(project(":idl-models"))
@@ -58,11 +56,6 @@ dependencies {
     implementation(project(":ts-model-introduction"))
     implementation(project(":ts-translator"))
 
-    runtime 'org.jetbrains.kotlin:kotlin-reflect'
-    compile 'org.jetbrains.kotlin:kotlin-reflect'
-
-    testImplementation 'org.jetbrains.kotlin:kotlin-reflect'
-
     testImplementation 'org.jetbrains.kotlin:kotlin-test-common'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
@@ -78,11 +71,9 @@ dependencies {
 
     testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-core:${gradle.kotlinSerializationVersion}"
 
-    compile(project(path: ":ts-converter", configuration: 'dukatTsResources'))
-
     kotlinJsLibs("org.jetbrains.kotlin:kotlin-stdlib-js:${gradle.kotlinVersion}")
 
-    toDownload 'org.jetbrains.kotlin:kotlin-stdlib-js'
+    compile(project(path: ":ts-converter", configuration: 'dukatTsResources'))
 }
 
 def getTsDependency() {
@@ -105,12 +96,6 @@ task propagateToIdeaRuntime(type: Copy) {
 
 compileTestKotlin.dependsOn = ["propagateToIdeaRuntime"]
 
-task download(type: Copy) {
-    from configurations.toDownload
-    into "${project.buildDir}/lib"
-    rename "kotlin-stdlib-js-${gradle.kotlinVersion}.jar", "kotlin-stdlib-js.jar"
-}
-
 task downloadDefinitelyTyped(type: Download) {
     onlyIfModified true
     overwrite false
@@ -124,16 +109,6 @@ task fetchDefinitelyTyped(dependsOn: downloadDefinitelyTyped, type: Copy) {
     }
     from zipTree(downloadDefinitelyTyped.dest)
     into "${rootProject.gradle.gradleUserHomeDir}/definitelyTyped"
-}
-
-task extractKoltinJsLibs(type: Copy) {
-    configurations.kotlinJsLibs.each {
-        from it.absolutePath
-    }
-    into "${project.buildDir}/kotlinHome"
-    rename { String fileName ->
-        return fileName.replace("-${gradle.kotlinVersion}.jar", ".jar")
-    }
 }
 
 task prepareTopNPackage(type: Copy) {
@@ -168,11 +143,20 @@ task prebuild {
     dependsOn = ["testClasses", ":node-package:buildDistrib", compileKotlin]
 }
 
+task extractKoltinJsLibs(type: Copy) {
+    configurations.kotlinJsLibs.each {
+        from it.absolutePath
+    }   
+    into "${project.buildDir}/kotlinHome"
+    rename { String fileName ->
+        return fileName.replace("-${gradle.kotlinVersion}.jar", ".jar")
+    }   
+}
+
 test.dependsOn = [
-        download,
         fetchDefinitelyTyped,
-        installTopN,
         extractKoltinJsLibs,
+        installTopN,
         ":node-package:nodeEnv",
         ":node-package:buildDistrib"
 ]
@@ -184,7 +168,6 @@ test {
             "dukat.test.cli",
             "dukat.test.failure.always",
             "dukat.test.emitTsDiagnostics",
-            "dukat.test.descriptorCompilation",
             "dukat.test.typescriptDukat"
     ].forEach { String projectProperty ->
         if (project.hasProperty(projectProperty)) {
