@@ -39,10 +39,17 @@ task createGeneratedSourcesDir {
     }
 }
 
+configurations {
+    resolvableCompile {
+        extendsFrom compile
+        canBeResolved = true
+    }
+}
+
 compileGeneratedJava {
     dependsOn(createGeneratedSourcesDir)
     dependsOn(generateGrammarSource)
-    classpath = configurations.compile
+    classpath = configurations.resolvableCompile
 }
 
 compileKotlin {
