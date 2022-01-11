@@ -52,11 +52,6 @@ dependencies {
     implementation(project(":ts-model-introduction"))
     implementation(project(":ts-translator"))
 
-    runtime 'org.jetbrains.kotlin:kotlin-reflect'
-    compile 'org.jetbrains.kotlin:kotlin-reflect'
-
-    testImplementation 'org.jetbrains.kotlin:kotlin-reflect'
-
     testImplementation 'org.jetbrains.kotlin:kotlin-test-common'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
